@@ -1,0 +1,402 @@
+[
+  {
+    "id": 1,
+    "name": "Monitor LG-L483",
+    "brand": "LG",
+    "model": "L483",
+    "amount": 5,
+    "details": "27\" IPS, 144Hz, 2560x1440"
+  },
+  {
+    "id": 2,
+    "name": "Fonte EVGA-E602",
+    "brand": "EVGA",
+    "model": "E602",
+    "amount": 3,
+    "details": "750W, 80 Plus"
+  },
+  {
+    "id": 3,
+    "name": "Placa de Vídeo NVIDIA-N775",
+    "brand": "NVIDIA",
+    "model": "N775",
+    "amount": 4,
+    "details": "RTX 3060, 12GB VRAM, Dual fan"
+  },
+  {
+    "id": 4,
+    "name": "Processador Intel-I621",
+    "brand": "Intel",
+    "model": "I621",
+    "amount": 6,
+    "details": "6 núcleos / 12 threads, 3.8GHz base, 16MB cache"
+  },
+  {
+    "id": 5,
+    "name": "HD / SSD Kingston-K203",
+    "brand": "Kingston",
+    "model": "K203",
+    "amount": 10,
+    "details": "512GB, SSD NVMe"
+  },
+  {
+    "id": 6,
+    "name": "Memória RAM Corsair-C559",
+    "brand": "Corsair",
+    "model": "C559",
+    "amount": 12,
+    "details": "16GB DDR4, 3200MHz"
+  },
+  {
+    "id": 7,
+    "name": "Notebook Dell-D942",
+    "brand": "Dell",
+    "model": "D942",
+    "amount": 2,
+    "details": "16GB RAM, 512GB SSD, i7-1165G7"
+  },
+  {
+    "id": 8,
+    "name": "Placa Mãe ASUS-A388",
+    "brand": "ASUS",
+    "model": "A388",
+    "amount": 4,
+    "details": "Socket AM4, mATX, chipset B550"
+  },
+  {
+    "id": 9,
+    "name": "Monitor AOC-A208",
+    "brand": "AOC",
+    "model": "A208",
+    "amount": 7,
+    "details": "24\" VA, 75Hz, 1920x1080"
+  },
+  {
+    "id": 10,
+    "name": "Fonte Corsair-C738",
+    "brand": "Corsair",
+    "model": "C738",
+    "amount": 5,
+    "details": "650W"
+  },
+  {
+    "id": 11,
+    "name": "Placa de Vídeo AMD-A673",
+    "brand": "AMD",
+    "model": "A673",
+    "amount": 3,
+    "details": "RX 6700 XT, 8GB VRAM, Triple fan"
+  },
+  {
+    "id": 12,
+    "name": "Processador AMD-A553",
+    "brand": "AMD",
+    "model": "A553",
+    "amount": 4,
+    "details": "8 núcleos / 16 threads, 3.5GHz base, 32MB cache"
+  },
+  {
+    "id": 13,
+    "name": "Memória RAM Kingston-K773",
+    "brand": "Kingston",
+    "model": "K773",
+    "amount": 8,
+    "details": "8GB DDR4, 2666MHz"
+  },
+  {
+    "id": 14,
+    "name": "Notebook Asus-A221",
+    "brand": "Asus",
+    "model": "A221",
+    "amount": 3,
+    "details": "8GB RAM, 256GB SSD, Ryzen 5 5500U"
+  },
+  {
+    "id": 15,
+    "name": "HD / SSD WD-W834",
+    "brand": "WD",
+    "model": "W834",
+    "amount": 5,
+    "details": "1000GB, HDD"
+  },
+  {
+    "id": 16,
+    "name": "Fonte Cooler Master-C774",
+    "brand": "Cooler Master",
+    "model": "C774",
+    "amount": 4,
+    "details": "600W, 80 Plus"
+  },
+  {
+    "id": 17,
+    "name": "Monitor Samsung-S927",
+    "brand": "Samsung",
+    "model": "S927",
+    "amount": 6,
+    "details": "24\" IPS, 60Hz, 1920x1080"
+  },
+  {
+    "id": 18,
+    "name": "Placa Mãe MSI-M384",
+    "brand": "MSI",
+    "model": "M384",
+    "amount": 5,
+    "details": "Socket LGA1200, ATX, chipset Z590"
+  },
+  {
+    "id": 19,
+    "name": "Memória RAM Corsair-C123",
+    "brand": "Corsair",
+    "model": "C123",
+    "amount": 7,
+    "details": "32GB DDR4, 3600MHz"
+  },
+  {
+    "id": 20,
+    "name": "Notebook HP-H112",
+    "brand": "HP",
+    "model": "H112",
+    "amount": 2,
+    "details": "16GB RAM, 1024GB SSD, i5-1135G7"
+  },
+  {
+    "id": 21,
+    "name": "Fonte EVGA-E293",
+    "brand": "EVGA",
+    "model": "E293",
+    "amount": 3,
+    "details": "500W"
+  },
+  {
+    "id": 22,
+    "name": "Monitor AOC-A321",
+    "brand": "AOC",
+    "model": "A321",
+    "amount": 4,
+    "details": "29\" VA, 75Hz, 2560x1440"
+  },
+  {
+    "id": 23,
+    "name": "Placa de Vídeo NVIDIA-N593",
+    "brand": "NVIDIA",
+    "model": "N593",
+    "amount": 2,
+    "details": "RTX 3070, 8GB VRAM, Dual fan"
+  },
+  {
+    "id": 24,
+    "name": "Processador Intel-I115",
+    "brand": "Intel",
+    "model": "I115",
+    "amount": 6,
+    "details": "4 núcleos / 8 threads, 3.2GHz base, 12MB cache"
+  },
+  {
+    "id": 25,
+    "name": "HD / SSD Crucial-C833",
+    "brand": "Crucial",
+    "model": "C833",
+    "amount": 7,
+    "details": "480GB, SSD SATA"
+  },
+  {
+    "id": 26,
+    "name": "Memória RAM Kingston-K432",
+    "brand": "Kingston",
+    "model": "K432",
+    "amount": 9,
+    "details": "16GB DDR4, 3000MHz"
+  },
+  {
+    "id": 27,
+    "name": "Notebook Lenovo-L121",
+    "brand": "Lenovo",
+    "model": "L121",
+    "amount": 3,
+    "details": "8GB RAM, 256GB SSD, Ryzen 7 5800U"
+  },
+  {
+    "id": 28,
+    "name": "Placa Mãe Gigabyte-G673",
+    "brand": "Gigabyte",
+    "model": "G673",
+    "amount": 5,
+    "details": "Socket AM4, ATX, chipset B450"
+  },
+  {
+    "id": 29,
+    "name": "Monitor Dell-D292",
+    "brand": "Dell",
+    "model": "D292",
+    "amount": 4,
+    "details": "21.5\" TN, 60Hz, 1920x1080"
+  },
+  {
+    "id": 30,
+    "name": "Fonte Corsair-C481",
+    "brand": "Corsair",
+    "model": "C481",
+    "amount": 6,
+    "details": "550W, 80 Plus"
+  },
+  {
+    "id": 31,
+    "name": "Placa de Vídeo AMD-A589",
+    "brand": "AMD",
+    "model": "A589",
+    "amount": 3,
+    "details": "RX 6600, 8GB VRAM, Dual fan"
+  },
+  {
+    "id": 32,
+    "name": "Processador Intel-I783",
+    "brand": "Intel",
+    "model": "I783",
+    "amount": 5,
+    "details": "6 núcleos / 12 threads, 3.7GHz base, 16MB cache"
+  },
+  {
+    "id": 33,
+    "name": "Memória RAM Corsair-C655",
+    "brand": "Corsair",
+    "model": "C655",
+    "amount": 7,
+    "details": "32GB DDR4, 3600MHz"
+  },
+  {
+    "id": 34,
+    "name": "Notebook HP-H837",
+    "brand": "HP",
+    "model": "H837",
+    "amount": 2,
+    "details": "32GB RAM, 1024GB SSD, i7-1165G7"
+  },
+  {
+    "id": 35,
+    "name": "HD / SSD Seagate-S843",
+    "brand": "Seagate",
+    "model": "S843",
+    "amount": 8,
+    "details": "1000GB, HDD"
+  },
+  {
+    "id": 36,
+    "name": "Fonte Cooler Master-C992",
+    "brand": "Cooler Master",
+    "model": "C992",
+    "amount": 5,
+    "details": "750W, 80 Plus"
+  },
+  {
+    "id": 37,
+    "name": "Monitor Samsung-S711",
+    "brand": "Samsung",
+    "model": "S711",
+    "amount": 6,
+    "details": "32\" IPS, 60Hz, 3840x2160"
+  },
+  {
+    "id": 38,
+    "name": "Placa Mãe MSI-M112",
+    "brand": "MSI",
+    "model": "M112",
+    "amount": 4,
+    "details": "Socket LGA1700, ATX, chipset Z690"
+  },
+  {
+    "id": 39,
+    "name": "Memória RAM Kingston-K891",
+    "brand": "Kingston",
+    "model": "K891",
+    "amount": 10,
+    "details": "8GB DDR4, 2666MHz"
+  },
+  {
+    "id": 40,
+    "name": "Notebook Lenovo-L993",
+    "brand": "Lenovo",
+    "model": "L993",
+    "amount": 3,
+    "details": "16GB RAM, 512GB SSD, Ryzen 5 5500U"
+  },
+  {
+    "id": 41,
+    "name": "Fonte EVGA-E453",
+    "brand": "EVGA",
+    "model": "E453",
+    "amount": 3,
+    "details": "600W, 80 Plus"
+  },
+  {
+    "id": 42,
+    "name": "Monitor AOC-A768",
+    "brand": "AOC",
+    "model": "A768",
+    "amount": 5,
+    "details": "24\" VA, 75Hz, 1920x1080"
+  },
+  {
+    "id": 43,
+    "name": "Placa de Vídeo NVIDIA-N994",
+    "brand": "NVIDIA",
+    "model": "N994",
+    "amount": 4,
+    "details": "RTX 3070, 8GB VRAM, Triple fan"
+  },
+  {
+    "id": 44,
+    "name": "Processador AMD-A392",
+    "brand": "AMD",
+    "model": "A392",
+    "amount": 7,
+    "details": "4 núcleos / 8 threads, 3.1GHz base, 12MB cache"
+  },
+  {
+    "id": 45,
+    "name": "HD / SSD Crucial-C122",
+    "brand": "Crucial",
+    "model": "C122",
+    "amount": 6,
+    "details": "480GB, SSD NVMe"
+  },
+  {
+    "id": 46,
+    "name": "Memória RAM Corsair-C333",
+    "brand": "Corsair",
+    "model": "C333",
+    "amount": 8,
+    "details": "16GB DDR4, 3000MHz"
+  },
+  {
+    "id": 47,
+    "name": "Notebook Asus-A111",
+    "brand": "Asus",
+    "model": "A111",
+    "amount": 3,
+    "details": "8GB RAM, 256GB SSD, Ryzen 7 5800U"
+  },
+  {
+    "id": 48,
+    "name": "Placa Mãe Gigabyte-G231",
+    "brand": "Gigabyte",
+    "model": "G231",
+    "amount": 5,
+    "details": "Socket AM4, mATX, chipset B450"
+  },
+  {
+    "id": 49,
+    "name": "Monitor Dell-D802",
+    "brand": "Dell",
+    "model": "D802",
+    "amount": 6,
+    "details": "21.5\" TN, 60Hz, 1920x1080"
+  },
+  {
+    "id": 50,
+    "name": "Fonte Corsair-C812",
+    "brand": "Corsair",
+    "model": "C812",
+    "amount": 7,
+    "details": "550W, 80 Plus"
+  }
+]
