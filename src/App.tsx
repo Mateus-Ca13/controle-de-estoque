@@ -2,20 +2,25 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import EquipmentsPage from './features/equipments/pages/EquipmentsPage'
-import { EquipmentsContextProvider } from './features/equipments/contexts/EquipmentsContextProvider'
+import { useEquipmentsStore } from './features/equipments/store/EquipmentsStore'
+import { useEffect } from 'react'
 
 function App() {
+
+  const fetchEquipmentsList = useEquipmentsStore(state => state.fetchEquipmentsList)
+
+  useEffect(()=>{
+    fetchEquipmentsList()
+  },[])
 
   return (
     <>
       <BrowserRouter>
-        <EquipmentsContextProvider>
           <Routes>
             
             <Route path='/' index element={<EquipmentsPage/>}/>
             
           </Routes>
-        </EquipmentsContextProvider>
       </BrowserRouter>
     </>
   )

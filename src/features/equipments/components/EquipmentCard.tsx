@@ -1,28 +1,26 @@
 import { useRef, useState } from 'react'
 import type { Equipment } from '../../../types/equipment'
 import { PencilIcon } from '@phosphor-icons/react/dist/ssr';
-import useEquipmentsContext from '../hooks/useEquipmentsContext';
+import { useEquipmentsStore } from '../store/EquipmentsStore';
 
 interface Props {
     equipInfo: Equipment;
 }
 
 function EquipmentCard(props: Props) {
+        console.log("EquipmentCard render")
     const { equipInfo } = props;
     const [isHover, setIsHover] = useState<boolean>(false)
     const card = useRef<HTMLDivElement>(null)
-    const { openEquipModal } = useEquipmentsContext()
+    const openEquipModal = useEquipmentsStore(state => state.openEquipModal)
 
     function mouseHoverHandler (){
         setIsHover(true)
     }
-
     function mouseOutHandler (){
        setIsHover(false)
     }
-
     
-
     return (
         <div ref={card} onMouseOver={()=>mouseHoverHandler()} onMouseOut={()=>mouseOutHandler()} className='flex text-sm md:text-base items-center p-2 shadow-md my-2 rounded-md hover:brightness-95 backdrop-brightness-100'>
             <div className='flex items-start w-1/12 pe-4 ps-2 text-nowrap overflow-hidden'>
@@ -32,7 +30,7 @@ function EquipmentCard(props: Props) {
                 <p>{equipInfo.name} {equipInfo.details}</p>
             </div>
             
-            <div className='flex hidden md:block items-start w-1/5 px-4 text-nowrap overflow-hidden'>
+            <div className='hidden md:flex items-start w-1/5 px-4 text-nowrap overflow-hidden'>
                 <p>{equipInfo.brand} <strong className='text-gray-400 mx-1'>|</strong> {equipInfo.model}</p>
             </div>
             <div className='flex items-start w-1/12 px-4 text-nowrap overflow-hidden'>

@@ -1,8 +1,19 @@
 
 @tailwind base;
 @tailwind components;
+
+.saveButPattern { 
+    @apply bg-green-600  text-white
+}
+
+.removeButPattern {
+    @apply bg-gray-800 text-white
+}
+
+
 @tailwind utilities;
 
 body {
     background-color: rgb(211, 211, 211);
 }
+

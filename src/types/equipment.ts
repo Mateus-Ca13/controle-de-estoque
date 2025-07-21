@@ -1,6 +1,6 @@
 
 export type Equipment = {
-    id: number
+    id: string
     name: string
     brand: string
     model?: string

@@ -1,14 +1,15 @@
+
 import AddEquipIcon from '../components/AddEquipIcon'
 import EquipmentEditModal from '../components/EquipmentEditModal'
 import EquipmentsList from '../components/EquipmentsList'
 import ResponsePopup from '../components/ResponsePopup'
-import useEquipmentsContext from '../hooks/useEquipmentsContext'
+import { useEquipmentsStore } from '../store/EquipmentsStore'
 
 
 function EquipmentsPage() {
-    const { equipmentsList } = useEquipmentsContext()
+    console.log("EquipmentsPage render")
+    const equipmentsList = useEquipmentsStore(state => state.equipmentsList)
 
-    console.log(equipmentsList)
     return (
         <main>
             <ResponsePopup/>

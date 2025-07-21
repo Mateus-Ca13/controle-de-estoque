@@ -1,12 +1,12 @@
-import React from 'react'
-import usePopupContext from '../hooks/usePopupContext'
+
 import { CheckIcon, XIcon } from '@phosphor-icons/react'
+import { useEquipmentsStore } from '../store/EquipmentsStore'
 
 
 
 function ResponsePopup() {
-    
-    const { popupStateProps } = usePopupContext()
+    console.log("ResponsePopup render")
+    const popupStateProps = useEquipmentsStore(state => state.popupStateProps)
 
     return (
 
