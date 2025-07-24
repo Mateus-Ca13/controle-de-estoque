@@ -1,9 +1,10 @@
 
-import AddEquipIcon from '../components/AddEquipIcon'
-import EquipmentEditModal from '../components/EquipmentEditModal'
-import EquipmentsList from '../components/EquipmentsList'
-import ResponsePopup from '../components/ResponsePopup'
+import AlertPopup from '../../../components/AlertPopup/AlertPopup'
+import { EquipmentsDataTable } from '../components/EquipmentsDataTable'
+import EquipmentsEditModal from '../components/EquipmentsEditModal'
+import ResponseToast from '../components/ResponseToast'
 import { useEquipmentsStore } from '../store/EquipmentsStore'
+import { equipmentsColumns } from '../utils/equipmentsColumns'
 
 
 function EquipmentsPage() {
@@ -11,11 +12,13 @@ function EquipmentsPage() {
     const equipmentsList = useEquipmentsStore(state => state.equipmentsList)
 
     return (
-        <main>
-            <ResponsePopup/>
-            <EquipmentsList equipments={equipmentsList}/>
-            <EquipmentEditModal/>
-            <AddEquipIcon/>
+        <main className='flex justify-center items-center h-screen bg-slate-200'>
+            
+            <ResponseToast/>
+            <EquipmentsDataTable columns={equipmentsColumns} data={equipmentsList}/>
+            <EquipmentsEditModal/>
+            <AlertPopup/>
+            
         </main>
     )
 }
