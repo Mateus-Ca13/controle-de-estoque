@@ -2,18 +2,17 @@
  
 import { ColumnDef, flexRender, getCoreRowModel, getSortedRowModel, getPaginationRowModel, SortingState, useReactTable, ColumnFiltersState, getFilteredRowModel } from "@tanstack/react-table"
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from  "../../../components/ui/table"
-import { Button } from "../../../components/ui/button"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from  "../../../../components/ui/table"
+import { Button } from "../../../../components/ui/button"
 import { useState } from "react"
-import { Input } from "../../../components/ui/input"
-import AddEquipIcon from "./AddEquipIcon"
+import { Input } from "../../../../components/ui/input"
 
-interface EquipmentsDataTableProps<TData, TValue> {
+interface ChangesHistoryDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
  
-export function EquipmentsDataTable<TData, TValue>({ columns, data }: EquipmentsDataTableProps<TData, TValue>) {
+export function ChangesHistoryDataTable<TData, TValue>({ columns, data }: ChangesHistoryDataTableProps<TData, TValue>) {
 
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -32,16 +31,15 @@ export function EquipmentsDataTable<TData, TValue>({ columns, data }: Equipments
 
   return (
     <div className="overflow-hidden border p-2 px-4 rounded-md w-full my-4 bg-white shadow-lg">
-       <div className="flex flex-col-reverse md:flex-row items-center py-4 pb-10 gap-4">
+       <div className="flex flex-col-reverse md:flex-row items-center py-4 gap-4">
         <Input
-          placeholder="Filtrar equipamentos..."
+          placeholder="Filtrar mudanças..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="w-full md:w-1/2"
         />
-        <AddEquipIcon/>
       </div>
       <Table>
         <TableHeader>

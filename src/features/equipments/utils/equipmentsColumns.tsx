@@ -1,6 +1,6 @@
 import { Equipment } from "../../../types/equipment";
 import { ColumnDef } from "@tanstack/react-table"
-import ActionsCell from "../components/ActionsCell";
+import EquipmentsActionsCell from "../components/EquipmentsActionsCell";
 import { Button } from "../../../components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 
@@ -67,6 +67,6 @@ export const equipmentsColumns: ColumnDef<Equipment>[] = [
   {
     id: "actions",
     header: "Ações",
-    cell: ActionsCell,
+    cell: EquipmentsActionsCell,
   },
 ]

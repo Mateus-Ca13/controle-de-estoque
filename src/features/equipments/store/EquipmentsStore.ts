@@ -2,13 +2,17 @@
 import { create } from "zustand";
 import type { Equipment } from "../../../types/equipment";
 import type { toastState } from "../../../types/toastState";
-import { searchEquipmentById } from "../../../utils/equipmentsUtils";
+import { searchEquipmentById } from "../utils/equipmentsUtils";
 import {v4 as uuidv4} from 'uuid';
 import { deleteEquipmentService, getEquipmentsListService, postEquipmentService, updateEquipmentService } from "../../../services/EquipmentsService";
 import { alertPopupState } from "../../../types/alertPopupState";
+import { EquipmentChangeLog } from "../../../types/equipmentChange";
+import { buildChangesSet } from "../../changes/utils/buildChangesSet";
+import { postEquipmentChangeService } from "../../../services/ChangesHistoryService";
 
 type equipmentsStoreType = {
     equipmentsList: Equipment[];
+    equipmentsChangeList: EquipmentChangeLog[]
     setEquipmentsList: (equipList: Equipment[]) => void
     editingEquipment: Equipment | undefined;
     setEditingEquipment: (newEquipState: Equipment) => void
@@ -19,6 +23,7 @@ type equipmentsStoreType = {
     openAlertPopup: (action: "save" | "delete" | undefined)=> void
     closeAlertPopup: () => void
     createAnEquipment: (equip: Equipment) => void
+    createChangeLogEntry: ( entryType: 'create'|'update'|'remove', equipInDatabase: Equipment) => void
     updateAnEquipment: (id: string, equip: Equipment)=> void
     deleteAnEquipment: (id: string) => void
     showResponseToast: (message: string, type: 'success' | 'error', duration: number) => void
@@ -28,6 +33,8 @@ type equipmentsStoreType = {
 
 export const useEquipmentsStore = create<equipmentsStoreType>((set, get)=>({
     equipmentsList: [],
+
+    equipmentsChangeList: [],
 
     setEquipmentsList: (newEquipList: Equipment[])=> set(()=>({equipmentsList: newEquipList})),
 
@@ -81,11 +88,6 @@ export const useEquipmentsStore = create<equipmentsStoreType>((set, get)=>({
             set(()=>({equipmentsList: newEquipmentsList}))
     },
 
-    showResponseToast: (message: string, type: 'success' | 'error', duration: number) => {
-        set((state)=>({toastStateProps: {...state.toastStateProps, message: message, type: type , isVisible: true}}))
-        setTimeout(()=>{ set((state)=>({toastStateProps: {...state.toastStateProps, isVisible: false}}))},duration)
-    },
-
     deleteAnEquipment: async (id:string) => {
             const responseEquip = await deleteEquipmentService(id)
             if (!responseEquip) {get().showResponseToast("Algo deu errado!", 'error', 6000); return}
@@ -94,14 +96,36 @@ export const useEquipmentsStore = create<equipmentsStoreType>((set, get)=>({
             set(()=>({equipmentsList: newEquipmentsList}))
     },
 
+    createChangeLogEntry: async ( entryType: 'create'|'update'|'remove', equipInDatabase: Equipment) => {
+        
+        const editingEquipment = get().editingEquipment!
+
+        const newChangeLog: EquipmentChangeLog = {
+            id: uuidv4(),
+            createdAt: new Date(),
+            equipId: editingEquipment.id,
+            authorId: localStorage.getItem("user_id")!,
+            type: entryType,
+            changes: buildChangesSet(editingEquipment, equipInDatabase)              
+        }
+        postEquipmentChangeService(newChangeLog)
+    },
+
+    showResponseToast: (message: string, type: 'success' | 'error', duration: number) => {
+        set((state)=>({toastStateProps: {...state.toastStateProps, message: message, type: type , isVisible: true}}))
+        setTimeout(()=>{ set((state)=>({toastStateProps: {...state.toastStateProps, isVisible: false}}))},duration)
+    },
+
     fetchEquipmentsList: async() => {
         const equipListData: Equipment[] | null = await getEquipmentsListService()
             if (!equipListData) {get().showResponseToast("Algo deu errado!", 'error', 6000); return}
             
             set(()=>({equipmentsList: equipListData}))
-            console.log("fetch data")
+            console.log("fetch equips data")
     },
 
     toastStateProps: {isVisible: false, message: '', type: 'success'},
 
 }))
+
+export const equipmentsStore = useEquipmentsStore;

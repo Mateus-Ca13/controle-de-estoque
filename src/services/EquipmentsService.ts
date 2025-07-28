@@ -1,22 +1,17 @@
 
-import axios from "axios";
+import { AxiosError } from "axios";
 import type { Equipment } from "../types/equipment";
+import { axiosClient } from "./axiosClient";
 
-const equipmentsApi = axios.create({
-  baseURL: "https://6877aa6adba809d901f06a55.mockapi.io/storage-control/",
-  timeout: 5000,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+
 
 const getEquipmentsListService = async ():Promise<Equipment[]|null> =>{
     try{
-         const response = await equipmentsApi<Equipment[]>("/equipments")
+         const response = await axiosClient<Equipment[]>("/equipments")
         return response.data
     }catch(err){
-        if (err instanceof Error) {
-            console.error(err.message)
+        if (err instanceof AxiosError) {
+            console.warn(err.response!.data)
         } else {
             console.error("Erro desconhecido", err)
         }
@@ -27,11 +22,11 @@ const getEquipmentsListService = async ():Promise<Equipment[]|null> =>{
 
 const getEquipmentByIdService = async (id: string | null): Promise<Equipment|null> =>{
     try{
-        const response = await equipmentsApi.get<Equipment>(`/equipments/${id}`)
+        const response = await axiosClient.get<Equipment>(`/equipments/${id}`)
         return response.data
     }catch(err){
-        if (err instanceof Error) {
-            console.error(err.message)
+        if (err instanceof AxiosError) {
+            console.error(err.response!.data)
         } else {
             console.error("Erro desconhecido", err)
         }
@@ -42,11 +37,11 @@ const getEquipmentByIdService = async (id: string | null): Promise<Equipment|nul
 
 const updateEquipmentService = async (id: string, equipment: Equipment):Promise<Equipment|null> =>{
     try{
-        const response = await equipmentsApi.put<Equipment>(`/equipments/${id}`, equipment)
+        const response = await axiosClient.put<Equipment>(`/equipments/${id}`, equipment)
         return response.data
     }catch(err){
-        if (err instanceof Error) {
-            console.error(err.message)
+        if (err instanceof AxiosError) {
+            console.error(err.response!.data)
         } else {
             console.error("Erro desconhecido", err)
         }
@@ -56,11 +51,11 @@ const updateEquipmentService = async (id: string, equipment: Equipment):Promise<
 
 const postEquipmentService = async (equipment: Equipment):Promise<Equipment|null> =>{
     try{
-        const response = await equipmentsApi.post<Equipment>("/equipments/", equipment)
+        const response = await axiosClient.post<Equipment>("/equipments/", equipment)
         return response.data
     }catch(err){
-        if (err instanceof Error) {
-            console.error(err.message)
+        if (err instanceof AxiosError) {
+            console.error(err.response!.data)
         } else {
             console.error("Erro desconhecido", err)
         }
@@ -70,11 +65,11 @@ const postEquipmentService = async (equipment: Equipment):Promise<Equipment|null
 
 const deleteEquipmentService = async (id: string):Promise<Equipment|null> =>{
     try{
-        const response = await equipmentsApi.delete<Equipment>(`equipments/${id}`)
+        const response = await axiosClient.delete<Equipment>(`equipments/${id}`)
         return response.data
     }catch(err){
-        if (err instanceof Error) {
-            console.error(err.message)
+        if (err instanceof AxiosError) {
+            console.error(err.response!.data)
         } else {
             console.error("Erro desconhecido", err)
         }

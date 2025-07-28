@@ -7,7 +7,7 @@ import { Row } from "@tanstack/react-table"
 
 
 
-function ActionsCell ({ row }: { row: Row<Equipment> }) {
+function EquipmentsActionsCell ({ row }: { row: Row<Equipment> }) {
   const equipment = row.original
   const openEquipModal = useEquipmentsStore((state) => state.openEquipModal)
   const openAlertPopup = useEquipmentsStore((state) => state.openAlertPopup)
@@ -34,4 +34,4 @@ function ActionsCell ({ row }: { row: Row<Equipment> }) {
   )
 }
 
-export default ActionsCell
+export default EquipmentsActionsCell

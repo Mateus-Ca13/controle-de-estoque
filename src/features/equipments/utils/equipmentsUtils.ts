@@ -1,4 +1,4 @@
-import type { Equipment } from "../types/equipment"
+import type { Equipment } from "../../../types/equipment"
 
 
 function searchEquipmentById(equipList: Equipment[],equipId: string): Equipment{

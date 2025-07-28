@@ -14,6 +14,7 @@ function AlertPopup() {
     const createAnEquipment = useEquipmentsStore(state => state.createAnEquipment);
     const deleteAnEquipment = useEquipmentsStore(state => state.deleteAnEquipment)
     const updateAnEquipment = useEquipmentsStore(state => state.updateAnEquipment);
+    const createChangeLogEntry = useEquipmentsStore(state=> state.createChangeLogEntry)
     const showResponseToast = useEquipmentsStore(state => state.showResponseToast);
     const closeEquipModal = useEquipmentsStore(state => state.closeEquipModal)
     const openEquipModal = useEquipmentsStore(state => state.openEquipModal)
@@ -47,10 +48,12 @@ function AlertPopup() {
         const response = await getEquipmentByIdService(equipment.id)
 
         if(!response){
+            createChangeLogEntry("create", equipment)
             createAnEquipment(equipment)
             closeEquipModal()
             showResponseToast("Equipamento salvo com sucesso.", "success", 6000)
         }else{
+            createChangeLogEntry("update", response)
             updateAnEquipment(equipment.id, equipment)
             closeEquipModal()
             showResponseToast("Equipamento editado com sucesso.", "success", 6000)
@@ -65,6 +68,7 @@ function AlertPopup() {
           if(!response){
              showResponseToast("Algo deu errado.", "error", 6000)
           }else{
+            createChangeLogEntry("remove", response)
             deleteAnEquipment(equipId)
             showResponseToast("Equipamento salvo com sucesso.", "success", 6000)
             closeEquipModal()
