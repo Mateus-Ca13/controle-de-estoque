@@ -1,6 +1,6 @@
 import { Equipment } from "../../../types/equipment";
 import { ColumnDef } from "@tanstack/react-table"
-import EquipmentsActionsCell from "../components/EquipmentsActionsCell";
+import EquipmentsActionsCell from "../components/EquipmentsDataTable/EquipmentsActionsCell/EquipmentsActionsCell";
 import { Button } from "../../../components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 

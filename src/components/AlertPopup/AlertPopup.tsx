@@ -4,6 +4,8 @@ import { AlertDialogFooter, AlertDialogHeader } from '../ui/alert-dialog'
 import { getEquipmentByIdService } from '../../services/EquipmentsService'
 import { Equipment } from '../../types/equipment'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 
 function AlertPopup() {
@@ -15,7 +17,6 @@ function AlertPopup() {
     const deleteAnEquipment = useEquipmentsStore(state => state.deleteAnEquipment)
     const updateAnEquipment = useEquipmentsStore(state => state.updateAnEquipment);
     const createChangeLogEntry = useEquipmentsStore(state=> state.createChangeLogEntry)
-    const showResponseToast = useEquipmentsStore(state => state.showResponseToast);
     const closeEquipModal = useEquipmentsStore(state => state.closeEquipModal)
     const openEquipModal = useEquipmentsStore(state => state.openEquipModal)
 
@@ -48,15 +49,15 @@ function AlertPopup() {
         const response = await getEquipmentByIdService(equipment.id)
 
         if(!response){
-            createChangeLogEntry("create", equipment)
-            createAnEquipment(equipment)
+            const createdEquip = await createAnEquipment(equipment)
+            if (createdEquip) createChangeLogEntry("create", createdEquip, createdEquip)
             closeEquipModal()
-            showResponseToast("Equipamento salvo com sucesso.", "success", 6000)
+            toast("Equipamento criado com sucesso.", {icon: <IoMdCheckmarkCircleOutline className='text-xl'/>})
         }else{
-            createChangeLogEntry("update", response)
+            createChangeLogEntry("update", editingEquipment!, response)
             updateAnEquipment(equipment.id, equipment)
             closeEquipModal()
-            showResponseToast("Equipamento editado com sucesso.", "success", 6000)
+            toast("Equipamento editado com sucesso.", {icon: <IoMdCheckmarkCircleOutline className='text-xl'/>})
         }
                 
     }
@@ -66,11 +67,11 @@ function AlertPopup() {
         const response = await getEquipmentByIdService(equipId)
 
           if(!response){
-             showResponseToast("Algo deu errado.", "error", 6000)
+             toast.error("Algo deu errado!")
           }else{
-            createChangeLogEntry("remove", response)
+            createChangeLogEntry("remove", response, editingEquipment!)
             deleteAnEquipment(equipId)
-            showResponseToast("Equipamento salvo com sucesso.", "success", 6000)
+            toast("Equipamento excluído com sucesso.", {icon: <IoMdCheckmarkCircleOutline className='text-xl'/>})
             closeEquipModal()
           }
         

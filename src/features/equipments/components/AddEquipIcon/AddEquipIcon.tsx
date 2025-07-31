@@ -1,10 +1,9 @@
-import { useEquipmentsStore } from '../store/EquipmentsStore'
-import { Button } from '../../../components/ui/button'
+import { useEquipmentsStore } from '../../store/EquipmentsStore'
+import { Button } from '../../../../components/ui/button'
 import { PiPlus } from 'react-icons/pi'
 
 
 function AddEquipIcon() {
-    console.log("AddEquipIcon render")
     const openEquipModal = useEquipmentsStore(state => state.openEquipModal)
     
     return (

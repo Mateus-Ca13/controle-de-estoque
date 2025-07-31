@@ -1,18 +1,16 @@
 
 import { create } from "zustand";
 import type { Equipment } from "../../../types/equipment";
-import type { toastState } from "../../../types/toastState";
 import { searchEquipmentById } from "../utils/equipmentsUtils";
-import {v4 as uuidv4} from 'uuid';
 import { deleteEquipmentService, getEquipmentsListService, postEquipmentService, updateEquipmentService } from "../../../services/EquipmentsService";
 import { alertPopupState } from "../../../types/alertPopupState";
 import { EquipmentChangeLog } from "../../../types/equipmentChange";
 import { buildChangesSet } from "../../changes/utils/buildChangesSet";
 import { postEquipmentChangeService } from "../../../services/ChangesHistoryService";
+import { toast } from "sonner";
 
 type equipmentsStoreType = {
     equipmentsList: Equipment[];
-    equipmentsChangeList: EquipmentChangeLog[]
     setEquipmentsList: (equipList: Equipment[]) => void
     editingEquipment: Equipment | undefined;
     setEditingEquipment: (newEquipState: Equipment) => void
@@ -22,19 +20,17 @@ type equipmentsStoreType = {
     alertPopupStateProps: alertPopupState
     openAlertPopup: (action: "save" | "delete" | undefined)=> void
     closeAlertPopup: () => void
-    createAnEquipment: (equip: Equipment) => void
-    createChangeLogEntry: ( entryType: 'create'|'update'|'remove', equipInDatabase: Equipment) => void
+    createAnEquipment: (equip: Equipment) => Promise<Equipment|null>
+    createChangeLogEntry: ( entryType: 'create'|'update'|'remove', newEquip: Equipment, oldEquip: Equipment) => void
     updateAnEquipment: (id: string, equip: Equipment)=> void
     deleteAnEquipment: (id: string) => void
-    showResponseToast: (message: string, type: 'success' | 'error', duration: number) => void
     fetchEquipmentsList: () => void
-    toastStateProps: toastState
+    filteredEquipmentsList: Equipment[]
+    setFilteredEquipmentsList: (newList:Equipment[])=>void
 }
 
 export const useEquipmentsStore = create<equipmentsStoreType>((set, get)=>({
     equipmentsList: [],
-
-    equipmentsChangeList: [],
 
     setEquipmentsList: (newEquipList: Equipment[])=> set(()=>({equipmentsList: newEquipList})),
 
@@ -47,9 +43,11 @@ export const useEquipmentsStore = create<equipmentsStoreType>((set, get)=>({
     closeEquipModal: ()=>set(()=>({isEquipModalOpen: false})),
 
     openEquipModal: (equipId: string | undefined)=>{
+        const equipmentsList = get().equipmentsList;
+
         const currentEquip = equipId? 
         searchEquipmentById(get().equipmentsList ,equipId) : 
-        {id: uuidv4(), name: "", details: "", brand: "", model: "", amount: 0}
+        {id: String(Number(equipmentsList[equipmentsList.length-1].id)+1), name: "", details: "", brand: "", model: "", amount: 0}
        
         set(()=>({
             editingEquipment: currentEquip,
@@ -73,16 +71,16 @@ export const useEquipmentsStore = create<equipmentsStoreType>((set, get)=>({
         }))
     },
     
-    createAnEquipment: async (newEquipment: Equipment) => {
+    createAnEquipment: async (newEquipment: Equipment): Promise<Equipment|null> => {
             const responseEquip: Equipment|null = await postEquipmentService(newEquipment)
-            if (!responseEquip) {get().showResponseToast("Algo deu errado!", 'error', 6000); return}
+            if (!responseEquip) {toast.error("Algo deu errado!"); return null}
             set((state)=>({equipmentsList: [...state.equipmentsList, responseEquip]}))
-
+            return responseEquip
     },
 
     updateAnEquipment : async (id: string, newEquipment: Equipment) => {
             const responseEquip = await updateEquipmentService(id, newEquipment)
-              if (!responseEquip) {get().showResponseToast("Algo deu errado!", 'error', 6000); return}
+              if (!responseEquip) {toast.error("Algo deu errado!"); return}
     
             const newEquipmentsList = get().equipmentsList.map((equip) => equip.id == responseEquip.id? newEquipment : equip)
             set(()=>({equipmentsList: newEquipmentsList}))
@@ -90,42 +88,39 @@ export const useEquipmentsStore = create<equipmentsStoreType>((set, get)=>({
 
     deleteAnEquipment: async (id:string) => {
             const responseEquip = await deleteEquipmentService(id)
-            if (!responseEquip) {get().showResponseToast("Algo deu errado!", 'error', 6000); return}
+            if (!responseEquip) {toast.error("Algo deu errado!"); return}
     
             const newEquipmentsList = get().equipmentsList.filter((equip) => equip.id != responseEquip.id)
             set(()=>({equipmentsList: newEquipmentsList}))
     },
 
-    createChangeLogEntry: async ( entryType: 'create'|'update'|'remove', equipInDatabase: Equipment) => {
-        
-        const editingEquipment = get().editingEquipment!
+    createChangeLogEntry: async ( entryType: 'create'|'update'|'remove', newEquip: Equipment, oldEquip: Equipment) => {
 
         const newChangeLog: EquipmentChangeLog = {
-            id: uuidv4(),
+            id: newEquip.id,
             createdAt: new Date(),
-            equipId: editingEquipment.id,
+            equipId: newEquip.id,
             authorId: localStorage.getItem("user_id")!,
             type: entryType,
-            changes: buildChangesSet(editingEquipment, equipInDatabase)              
+            changes: buildChangesSet(oldEquip, newEquip)              
         }
         postEquipmentChangeService(newChangeLog)
     },
 
-    showResponseToast: (message: string, type: 'success' | 'error', duration: number) => {
-        set((state)=>({toastStateProps: {...state.toastStateProps, message: message, type: type , isVisible: true}}))
-        setTimeout(()=>{ set((state)=>({toastStateProps: {...state.toastStateProps, isVisible: false}}))},duration)
-    },
-
     fetchEquipmentsList: async() => {
         const equipListData: Equipment[] | null = await getEquipmentsListService()
-            if (!equipListData) {get().showResponseToast("Algo deu errado!", 'error', 6000); return}
+            if (!equipListData) {toast.error("Algo deu errado!"); return}
             
-            set(()=>({equipmentsList: equipListData}))
-            console.log("fetch equips data")
+            set(()=>({
+                equipmentsList: equipListData,
+                filteredEquipmentsList: equipListData}))            
     },
+    
+    filteredEquipmentsList: [],
 
-    toastStateProps: {isVisible: false, message: '', type: 'success'},
-
+    setFilteredEquipmentsList: (newEquipList: Equipment[])=>{
+        set(()=> ({filteredEquipmentsList: newEquipList}))
+    }
 }))
 
 export const equipmentsStore = useEquipmentsStore;

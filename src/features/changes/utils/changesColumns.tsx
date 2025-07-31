@@ -2,7 +2,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Button } from "../../../components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import { EquipmentChangeLog } from "../../../types/equipmentChange";
-import { changeTypeTranslate } from "../../../utils/formatContent";
+import { changeTypeTranslate, formatTimestamp } from "../../../utils/formatContent";
 import ChangesActionsCell from "../components/ChangesHistoryDatabase/ChangesActionsCell/ChangesActionsCell";
 
 export const changesColumns: ColumnDef<EquipmentChangeLog>[] = [
@@ -55,6 +55,7 @@ export const changesColumns: ColumnDef<EquipmentChangeLog>[] = [
     
   },
   {
+    accessorFn: row => `${formatTimestamp(row.createdAt)}`,
     accessorKey: "createdAt",
     header: ({ column }) => {
       return (
@@ -78,7 +79,7 @@ export const changesColumns: ColumnDef<EquipmentChangeLog>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Autor
+          ID do Autor
           <ArrowUpDown className="h-4 w-4" />
         </Button>
       )

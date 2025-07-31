@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import { EquipmentChangeLog } from "../../../types/equipmentChange";
 import { getChangesLogListService } from "../../../services/ChangesHistoryService";
-import { equipmentsStore } from "../../equipments/store/EquipmentsStore";
-
+import { toast } from "sonner";
 
 type ChangesStoreType = {
     changesHistoryList: EquipmentChangeLog[]
@@ -11,9 +10,9 @@ type ChangesStoreType = {
     closeChangesLogModal: ()=> void
     isChangesModalOpen: boolean
     viewingChangelog: EquipmentChangeLog | undefined
+    filteredChangesLogList: EquipmentChangeLog[]
+    setFilteredChangesLogList: (newChangesLogList:EquipmentChangeLog[])=>void
 }
-
-const showResponseToast = equipmentsStore.getState().showResponseToast
 
 export const useChangesStore = create<ChangesStoreType>((set) => ({
 
@@ -25,10 +24,10 @@ export const useChangesStore = create<ChangesStoreType>((set) => ({
 
     fetchChangesHistoryList: async () => {
         const changesListData: EquipmentChangeLog[] | null = await getChangesLogListService()
-         if (!changesListData) {showResponseToast("Algo deu errado!", 'error', 6000); return}
+         if (!changesListData) { 
+            toast.error("Algo deu errado!"); return }
 
-         set(()=>({changesHistoryList: changesListData}))
-            console.log("fetch changes data")
+         set(()=>({changesHistoryList: changesListData, filteredChangesLogList: changesListData}))
     },
     
     openChangesLogModal: (changeLogId: string) => {
@@ -40,6 +39,11 @@ export const useChangesStore = create<ChangesStoreType>((set) => ({
     },
     closeChangesLogModal: () => {
         set(() => ({ isChangesModalOpen: false}))
-    }
+    },
+    filteredChangesLogList: [],
+    
+        setFilteredChangesLogList: (newChangesLogList: EquipmentChangeLog[])=>{
+            set(()=> ({filteredChangesLogList: newChangesLogList}))
+        }
     
 }))

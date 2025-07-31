@@ -1,8 +1,8 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
-import { useEquipmentsStore } from "../store/EquipmentsStore"
-import { Button } from "../../../components/ui/button"
+import { useEquipmentsStore } from "../../../store/EquipmentsStore"
+import { Button } from "../../../../../components/ui/button"
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react"
-import { Equipment } from "../../../types/equipment"
+import { Equipment } from "../../../../../types/equipment"
 import { Row } from "@tanstack/react-table"
 
 

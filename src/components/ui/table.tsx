@@ -50,7 +50,6 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
 }
 
 function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
-  console.log(props.children)
   return (
     <tr
       data-slot="table-row"

@@ -2,11 +2,15 @@
  
 import { ColumnDef, flexRender, getCoreRowModel, getSortedRowModel, getPaginationRowModel, SortingState, useReactTable, ColumnFiltersState, getFilteredRowModel } from "@tanstack/react-table"
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from  "../../../components/ui/table"
-import { Button } from "../../../components/ui/button"
-import { useState } from "react"
-import { Input } from "../../../components/ui/input"
-import AddEquipIcon from "./AddEquipIcon"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from  "../../../../components/ui/table"
+import { Button } from "../../../../components/ui/button"
+import { useEffect, useState } from "react"
+import { Input } from "../../../../components/ui/input"
+import AddEquipIcon from "../AddEquipIcon/AddEquipIcon"
+import { Loader2Icon, RefreshCcw } from "lucide-react"
+import { useEquipmentsStore } from "../../store/EquipmentsStore"
+import { toast } from "sonner"
+import { Equipment } from "../../../../types/equipment"
 
 interface EquipmentsDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -17,6 +21,13 @@ export function EquipmentsDataTable<TData, TValue>({ columns, data }: Equipments
 
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const fetchEquipmentsList = useEquipmentsStore(state => state.fetchEquipmentsList)
+  const setFilteredEquipmentsList = useEquipmentsStore(state => state.setFilteredEquipmentsList)
+
+  const  refreshDataList = () => {
+        toast("Buscando novos registros...",{icon: <Loader2Icon size={18} className="animate-spin" />})
+       fetchEquipmentsList()
+    }
 
   const table = useReactTable({
     data, columns, 
@@ -28,6 +39,14 @@ export function EquipmentsDataTable<TData, TValue>({ columns, data }: Equipments
     getFilteredRowModel: getFilteredRowModel(),
     state: {sorting, columnFilters},
   })
+
+  useEffect(()=>{
+    //console.log(table.getFilteredRowModel().rows)
+    const filteredList: Equipment[] = table.getFilteredRowModel().rows.map(row => row.original as Equipment)
+    console.log(filteredList)
+    setFilteredEquipmentsList(filteredList)
+    
+  },[table.getFilteredRowModel().rows])
  
 
   return (
@@ -42,6 +61,7 @@ export function EquipmentsDataTable<TData, TValue>({ columns, data }: Equipments
           className="w-full md:w-1/2"
         />
         <AddEquipIcon/>
+        <Button onClick={()=>refreshDataList()} className="w-full md:w-1/4 px-8!" variant={"default"}>Atualizar <RefreshCcw size={16}/></Button>
       </div>
       <Table>
         <TableHeader>

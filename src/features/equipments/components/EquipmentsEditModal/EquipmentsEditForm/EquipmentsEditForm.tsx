@@ -2,12 +2,14 @@ import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../../../components/ui/form"
 import * as z from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useEquipmentsStore } from "../../../store/EquipmentsStore";
+import { equipmentsStore, useEquipmentsStore } from "../../../store/EquipmentsStore";
 import { Input } from "../../../../../components/ui/input";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { DialogFooter } from "../../../../../components/ui/dialog";
 import { Button } from "../../../../../components/ui/button";
 import { Equipment } from "../../../../../types/equipment";
+import { compareIfChangesHasBeenMade } from "../../../utils/equipmentsUtils";
+import { toast } from "sonner";
 
 const formSchema = z.object({
     id: z.string(),
@@ -19,6 +21,7 @@ const formSchema = z.object({
 })
 
 function EquipmentsEditForm() {
+    const equipmentsList  = useEquipmentsStore(state => state.equipmentsList)
     const editingEquipment = useEquipmentsStore(state => state.editingEquipment)
     const openAlertPopup = useEquipmentsStore((state) => state.openAlertPopup)
     const setEditingEquipment = useEquipmentsStore(state => state.setEditingEquipment)
@@ -37,6 +40,14 @@ function EquipmentsEditForm() {
     })
 
     function submitHandler(data: Equipment){
+        const comparingEquip: Equipment = equipmentsList.filter(equip => equip.id === data.id)[0] 
+        const dataWasEdited = compareIfChangesHasBeenMade(data, comparingEquip);
+
+        if (!dataWasEdited){
+            toast.warning("Nenhuma alteração foi feita no equipamento.");
+            return;
+        }
+
         setEditingEquipment({...editingEquipment!, ...data});
         openAlertPopup("save");
     }
@@ -67,7 +78,7 @@ function EquipmentsEditForm() {
                 name="name"
                 render={({field}) => (
                     <FormItem className="gap-0">
-                        <FormLabel>Nome</FormLabel>
+                        <FormLabel>Nome<span className="text-red-700 -ms-2">*</span></FormLabel>
                         <FormControl>
                             <Input
                             className="mt-2 mb-1"
@@ -99,7 +110,7 @@ function EquipmentsEditForm() {
                 name="brand"
                 render={({field}) => (
                     <FormItem className="gap-0">
-                        <FormLabel>Marca</FormLabel>
+                        <FormLabel>Marca<span className="text-red-700 -ms-2">*</span></FormLabel>
                         <FormControl>
                             <Input
                             className="mt-2 mb-1" 
@@ -131,7 +142,7 @@ function EquipmentsEditForm() {
                 name="amount"
                 render={({field}) => (
                     <FormItem className="gap-0">
-                        <FormLabel>Quantidade</FormLabel>
+                        <FormLabel>Quantidade<span className="text-red-700 -ms-2">*</span></FormLabel>
                         <FormControl>
                             <Input
                             min={0}
@@ -145,6 +156,7 @@ function EquipmentsEditForm() {
                         <FormMessage children=""/>
                     </FormItem>
                 )}/>
+                <FormMessage children=""/>
                 <DialogFooter>
                     <DialogClose asChild>
                         <Button variant="outline">Cancelar</Button>
