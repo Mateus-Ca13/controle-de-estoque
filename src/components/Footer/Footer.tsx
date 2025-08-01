@@ -12,7 +12,7 @@ function Footer() {
                 <a target="_blank" href="https://www.instagram.com/mateus_ca13/"><PiInstagramLogoFill className="hover:opacity-50 duration-150 hover:cursor-pointer"/></a>
                 <a target="_blank" href="https://github.com/Mateus-Ca13/controle-de-estoque"><PiGithubLogoFill className="hover:opacity-50 duration-150 hover:cursor-pointer"/></a>
             </div>
-            <p className="flex font-semibold text-sm items-center"><PiCopyright className="me-0.5"/>2025 Controle de Estoque - Todos os direitos reservados.</p>
+            <p className="flex items-start font-semibold text-sm  text-center"><PiCopyright className="me-0.5 text-xl"/> 2025 Controle de Estoque - Todos os direitos reservados.</p>
         </section>
     )
 }

@@ -41,12 +41,17 @@ function EquipmentsEditForm() {
 
     function submitHandler(data: Equipment){
         const comparingEquip: Equipment = equipmentsList.filter(equip => equip.id === data.id)[0] 
-        const dataWasEdited = compareIfChangesHasBeenMade(data, comparingEquip);
+        if(comparingEquip){
+            const dataWasEdited = compareIfChangesHasBeenMade(data, comparingEquip);
 
-        if (!dataWasEdited){
+             if (!dataWasEdited){
             toast.warning("Nenhuma alteração foi feita no equipamento.");
             return;
+            }
         }
+        
+
+       
 
         setEditingEquipment({...editingEquipment!, ...data});
         openAlertPopup("save");
