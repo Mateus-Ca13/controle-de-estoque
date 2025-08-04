@@ -11,6 +11,7 @@ type EquipmentChangeLog = {
 type EquipmentFieldChanges = {
     name: FieldComparison<string>
     details: FieldComparison<string>
+    category: FieldComparison<"computers" | "components" | "peripherals" | "monitors" | "printAndScans" | "networking"| "accessories" | "powerAndSafety" | "mobiles" | "itTools">
     brand: FieldComparison<string>
     model: FieldComparison<string>
     amount: FieldComparison<number>

@@ -3,6 +3,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import EquipmentsActionsCell from "../components/EquipmentsDataTable/EquipmentsActionsCell/EquipmentsActionsCell";
 import { Button } from "../../../components/ui/button";
 import { ArrowUpDown } from "lucide-react";
+import { formatCategoriesName } from "../../../utils/formatContent";
 
 export const equipmentsColumns: ColumnDef<Equipment>[] = [
   {
@@ -41,6 +42,23 @@ export const equipmentsColumns: ColumnDef<Equipment>[] = [
     header: "Detalhes",
   },
   {
+    accessorKey: "category",
+    accessorFn: row => `${formatCategoriesName(row.category)}`,
+    header: ({ column }) => {
+      return (
+        <Button
+          className="px-0!"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Categoria
+          <ArrowUpDown className="h-4 w-4" />
+        </Button>
+      )
+    },
+    
+  },
+  {
     accessorKey: "brand",
     header: ({ column }) => {
       return (
@@ -55,6 +73,7 @@ export const equipmentsColumns: ColumnDef<Equipment>[] = [
       )
     },
   },
+
   {
     accessorKey: "model",
     header: "Modelo",

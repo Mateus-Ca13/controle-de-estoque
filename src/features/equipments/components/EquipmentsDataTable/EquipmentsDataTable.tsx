@@ -61,7 +61,7 @@ export function EquipmentsDataTable<TData, TValue>({ columns, data }: Equipments
           className="w-full md:w-1/2"
         />
         <AddEquipIcon/>
-        <Button onClick={()=>refreshDataList()} className="w-full md:w-1/4 px-8!" variant={"default"}>Atualizar <RefreshCcw size={16}/></Button>
+        <Button onClick={()=>refreshDataList()} className="w-full md:w-1/4 px-8! bg-neutral-700 text-white hover:bg-neutral-600" variant={"default"}>Atualizar <RefreshCcw size={16}/></Button>
       </div>
       <Table>
         <TableHeader>
@@ -100,7 +100,7 @@ export function EquipmentsDataTable<TData, TValue>({ columns, data }: Equipments
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+                Sem resultados.
               </TableCell>
             </TableRow>
           )}

@@ -1,3 +1,5 @@
+import { Equipment } from "../types/equipment";
+
 function changeTypeTranslate (content: "remove" | "update" | "create") {
     switch (content) {
         case "remove":
@@ -21,4 +23,43 @@ function formatTimestamp (date: Date){
     return `${day}/${month}/${year} às ${hour}:${minute}`
 }
 
-export { changeTypeTranslate, formatTimestamp}
+function formatCategoriesName(category: Equipment["category"]){
+    switch (category) {
+        case "computers":
+            return "Computadores/Notebooks"
+
+        case "accessories":
+            return "Acessórios"
+
+        case "components":
+            return "Componentes"
+
+        case "itTools":
+            return "Ferramentas e Utilitários"
+
+        case "mobiles":
+            return "Dispositivos Móveis"
+
+        case "monitors":
+            return "Monitores/Telas"
+
+        case "networking":
+            return "Redes e Conectividade"
+
+        case "peripherals":
+            return "Periféricos"
+
+        case "powerAndSafety":
+            return "Segurança e Energia"
+
+        case "printAndScans":
+            return "Impressão e Digitalização"
+
+        default:
+            
+            return "Desconhecido"
+    }
+}
+
+
+export { changeTypeTranslate, formatTimestamp, formatCategoriesName}

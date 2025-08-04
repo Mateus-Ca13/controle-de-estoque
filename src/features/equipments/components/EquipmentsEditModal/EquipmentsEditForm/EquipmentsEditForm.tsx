@@ -10,14 +10,31 @@ import { Button } from "../../../../../components/ui/button";
 import { Equipment } from "../../../../../types/equipment";
 import { compareIfChangesHasBeenMade } from "../../../utils/equipmentsUtils";
 import { toast } from "sonner";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../../components/ui/select";
+import { formatCategoriesName } from "../../../../../utils/formatContent";
+
+const CATEGORIES = [
+    "computers",
+     "components",
+     "peripherals",
+     "monitors",
+     "printAndScans",
+     "networking",
+     "accessories",
+     "powerAndSafety",
+     "mobiles",
+     'itTools'
+] as const;
+
 
 const formSchema = z.object({
     id: z.string(),
     name: z.string().min(2, "Campo obrigatório.").max(50, "Limite de 50 caracteres excedido."),
-    details: z.string().max(250, "Limite de 250 caracteres excedido.").optional(),
-    brand: z.string().max(50, "Limite de 50 caracteres excedido.").min(2, "Campo obrigatório."),
-    model: z.string().max(50, "Limite de 50 caracteres excedido.").optional(),
-    amount: z.number().min(0, "Quantidade não pode ser menor que 0.")
+    category: z.enum(CATEGORIES, "Campo obrigatório."),
+    details: z.string().max(150, "Limite de 150 caracteres excedido.").optional(),
+    brand: z.string().max(30, "Limite de 30 caracteres excedido.").min(2, "Campo obrigatório."),
+    model: z.string().max(30, "Limite de 30 caracteres excedido.").optional(),
+    amount: z.number().min(0, "Quantidade não pode ser menor que 0.").max(999999, "Quantidade não pode ser maior que 999999.")
 })
 
 function EquipmentsEditForm() {
@@ -32,7 +49,8 @@ function EquipmentsEditForm() {
         defaultValues: {
             id: editingEquipment?.id,
             name: editingEquipment?.name,
-            details: editingEquipment?.details,
+            category: editingEquipment?.category,
+            details: editingEquipment?.details, 
             brand: editingEquipment?.brand,
             model: editingEquipment?.model,
             amount: editingEquipment?.amount
@@ -71,7 +89,7 @@ function EquipmentsEditForm() {
                             <Input
                             disabled
                             className="mt-2 mb-1"
-                            placeholder="Nome do equipamento" 
+                            placeholder="ID" 
                             {...field}
                             />
                         </FormControl>
@@ -87,10 +105,29 @@ function EquipmentsEditForm() {
                         <FormControl>
                             <Input
                             className="mt-2 mb-1"
-                            placeholder="Nome do equipamento" 
+                            placeholder="..." 
                             {...field}
                             />
                         </FormControl>
+                        <FormMessage children=""/>
+                    </FormItem>
+                )}/>
+                <FormField
+                control={equipmentsForm.control}
+                name="category"
+                render={({field}) => (
+                    <FormItem className="gap-0">
+                        <FormLabel>Categoria<span className="text-red-700 dark:text-red-400 -ms-2">*</span></FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl className="mt-2 mb-1 w-full">
+                            <SelectTrigger>
+                                <SelectValue placeholder="Selecione a categoria" />
+                            </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                            {CATEGORIES.map((category)=> <SelectItem key={category} value={category}>{formatCategoriesName(category)}</SelectItem>)}
+                            </SelectContent>
+                        </Select>
                         <FormMessage children=""/>
                     </FormItem>
                 )}/>
@@ -103,7 +140,7 @@ function EquipmentsEditForm() {
                         <FormControl>
                             <Input
                             className="mt-2 mb-1"
-                            placeholder="Detalhes do equipamento" 
+                            placeholder="..." 
                             {...field}
                             />
                         </FormControl>
@@ -119,7 +156,7 @@ function EquipmentsEditForm() {
                         <FormControl>
                             <Input
                             className="mt-2 mb-1" 
-                            placeholder="Marca do equipamento" 
+                            placeholder="..." 
                             {...field}
                             />
                         </FormControl>
@@ -135,7 +172,7 @@ function EquipmentsEditForm() {
                         <FormControl>
                             <Input
                             className="mt-2 mb-1" 
-                            placeholder="Modelo do equipamento" 
+                            placeholder="..." 
                             {...field}
                             />
                         </FormControl>

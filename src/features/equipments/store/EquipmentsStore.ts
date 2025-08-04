@@ -44,10 +44,10 @@ export const useEquipmentsStore = create<equipmentsStoreType>((set, get)=>({
 
     openEquipModal: (equipId: string | undefined)=>{
         const equipmentsList = get().equipmentsList;
-
+        
         const currentEquip = equipId? 
         searchEquipmentById(get().equipmentsList ,equipId) : 
-        {id: String(Number(equipmentsList[equipmentsList.length-1].id)+1), name: "", details: "", brand: "", model: "", amount: 0}
+        {id: String(Number(equipmentsList[0].id)+1), name: "", category: "computers", details: "", brand: "", model: "", amount: 0} as Equipment
        
         set(()=>({
             editingEquipment: currentEquip,
@@ -124,3 +124,7 @@ export const useEquipmentsStore = create<equipmentsStoreType>((set, get)=>({
 }))
 
 export const equipmentsStore = useEquipmentsStore;
+
+
+
+

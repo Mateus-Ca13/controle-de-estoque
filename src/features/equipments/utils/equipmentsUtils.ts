@@ -7,7 +7,11 @@ function searchEquipmentById(equipList: Equipment[],equipId: string): Equipment{
 
 function compareIfChangesHasBeenMade (newEquip: Equipment, oldEquip: Equipment){
     for (const key in newEquip) {
-        if (newEquip[key] != oldEquip[key]) {
+
+        const newEquipFormattedValue: string = String(newEquip[key]).trim() 
+        const oldEquipFormattedValue: string =  String(oldEquip[key]).trim()
+
+        if (newEquipFormattedValue != oldEquipFormattedValue) {
             return true;
         }
     }

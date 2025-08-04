@@ -18,6 +18,11 @@ function buildChangesSet (equipInDatabase: Equipment, newEquipment: Equipment): 
     }else {
         result.details = {wasChanged: false}
     }
+    if(equipInDatabase.category != newEquipment.category){
+        result.category = {wasChanged: true, newValue: newEquipment.category, oldValue: equipInDatabase.category}
+    }else {
+        result.category = {wasChanged: false}
+    }
     if(equipInDatabase.brand != newEquipment.brand){
         result.brand = {wasChanged: true, newValue: newEquipment.brand, oldValue: equipInDatabase.brand}
     }else {

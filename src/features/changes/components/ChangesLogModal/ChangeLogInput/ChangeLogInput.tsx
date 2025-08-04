@@ -13,7 +13,7 @@ function ChangeLogInput(props: Props) {
 
     return (
         changesInfo!.wasChanged ? 
-        <div>
+        <div className='my-2 text-sm text-start'>
             <label className='font-semibold'>{propName}</label>
             <div className='flex items-center mt-1'>
                 <Input className='border-slate-400' disabled value={changesInfo!.oldValue}/>
@@ -22,9 +22,9 @@ function ChangeLogInput(props: Props) {
             </div>
             
         </div>:
-        <div className='my-4'>
+        <div className='my-2 text-sm text-start'>
         <label className='font-semibold'>{propName}</label>
-         <Input className='border-slate-500 bg-slate-300 text-slate-800' disabled value={`${propName} não alterado(a)...`}/> 
+         <Input className='border-slate-500 bg-slate-300 text-slate-800 mt-1 dark:text-neutral-500' disabled value={`${propName} não alterado(a)...`}/> 
         </div>
     )
 }

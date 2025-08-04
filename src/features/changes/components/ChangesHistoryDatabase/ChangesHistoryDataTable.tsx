@@ -59,7 +59,7 @@ export function ChangesHistoryDataTable<TData, TValue>({ columns, data }: Change
           }
           className="w-full md:w-1/2"
         />
-        <Button onClick={()=>refreshDataList()} className="w-full md:w-1/4 px-8!" variant={"default"}>Atualizar <RefreshCcw size={16}/></Button>
+        <Button onClick={()=>refreshDataList()} className="w-full md:w-1/4 px-8! bg-neutral-700 text-white hover:bg-neutral-600" variant={"default"}>Atualizar <RefreshCcw size={16}/></Button>
       </div>
       <Table>
         <TableHeader>
@@ -98,7 +98,7 @@ export function ChangesHistoryDataTable<TData, TValue>({ columns, data }: Change
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+                Sem resultados.
               </TableCell>
             </TableRow>
           )}
