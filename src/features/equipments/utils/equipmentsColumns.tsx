@@ -42,7 +42,18 @@ export const equipmentsColumns: ColumnDef<Equipment>[] = [
   },
   {
     accessorKey: "brand",
-    header: "Marca",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="px-0!"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Marca
+          <ArrowUpDown className="h-4 w-4" />
+        </Button>
+      )
+    },
   },
   {
     accessorKey: "model",

@@ -16,17 +16,17 @@ function EquipmentsActionsCell ({ row }: { row: Row<Equipment> }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="h-8 w-8 p-0">
+        <Button variant="ghost" className="h-5 w-8 p-0">
           <span className="sr-only">Open menu</span>
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-white z-20 border-2 rounded-xl p-3 " align="end">
-        <DropdownMenuItem className="rounded-md my-1 pe-24 p-2 hover:cursor-pointer hover:bg-slate-200 flex items-center" onClick={() => openEquipModal(equipment.id)}>
+      <DropdownMenuContent className="bg-white dark:bg-neutral-900 z-20 border-2 rounded-xl p-3 " align="end">
+        <DropdownMenuItem className="rounded-md my-1 pe-24 p-2 hover:cursor-pointer hover:bg-slate-200 dark:hover:bg-neutral-700 flex items-center" onClick={() => openEquipModal(equipment.id)}>
           <Pencil className="w-4 me-1"/>Editar 
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="rounded-md my-1 pe-24 p-2 hover:cursor-pointer hover:bg-slate-200 flex items-center text-red-700" onClick={() => {setEditingEquipment(equipment); openAlertPopup("delete")}}>
+        <DropdownMenuItem className="rounded-md my-1 pe-24 p-2 hover:cursor-pointer hover:bg-slate-200 dark:hover:bg-neutral-700 flex items-center text-red-700 dark:text-red-400" onClick={() => {setEditingEquipment(equipment); openAlertPopup("delete")}}>
          <Trash2 className="w-4 me-1"/> Excluir
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../../../components/ui/form"
 import * as z from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod"
-import { equipmentsStore, useEquipmentsStore } from "../../../store/EquipmentsStore";
+import { useEquipmentsStore } from "../../../store/EquipmentsStore";
 import { Input } from "../../../../../components/ui/input";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { DialogFooter } from "../../../../../components/ui/dialog";
@@ -14,9 +14,9 @@ import { toast } from "sonner";
 const formSchema = z.object({
     id: z.string(),
     name: z.string().min(2, "Campo obrigatório.").max(50, "Limite de 50 caracteres excedido."),
-    details: z.string().optional(),
-    brand: z.string().min(2, "Campo obrigatório."),
-    model: z.string().optional(),
+    details: z.string().max(250, "Limite de 250 caracteres excedido.").optional(),
+    brand: z.string().max(50, "Limite de 50 caracteres excedido.").min(2, "Campo obrigatório."),
+    model: z.string().max(50, "Limite de 50 caracteres excedido.").optional(),
     amount: z.number().min(0, "Quantidade não pode ser menor que 0.")
 })
 
@@ -83,7 +83,7 @@ function EquipmentsEditForm() {
                 name="name"
                 render={({field}) => (
                     <FormItem className="gap-0">
-                        <FormLabel>Nome<span className="text-red-700 -ms-2">*</span></FormLabel>
+                        <FormLabel>Nome<span className="text-red-700 dark:text-red-400 -ms-2">*</span></FormLabel>
                         <FormControl>
                             <Input
                             className="mt-2 mb-1"
@@ -115,7 +115,7 @@ function EquipmentsEditForm() {
                 name="brand"
                 render={({field}) => (
                     <FormItem className="gap-0">
-                        <FormLabel>Marca<span className="text-red-700 -ms-2">*</span></FormLabel>
+                        <FormLabel>Marca<span className="text-red-700 dark:text-red-400 -ms-2">*</span></FormLabel>
                         <FormControl>
                             <Input
                             className="mt-2 mb-1" 
@@ -147,7 +147,7 @@ function EquipmentsEditForm() {
                 name="amount"
                 render={({field}) => (
                     <FormItem className="gap-0">
-                        <FormLabel>Quantidade<span className="text-red-700 -ms-2">*</span></FormLabel>
+                        <FormLabel>Quantidade<span className="text-red-700 dark:text-red-400 -ms-2">*</span></FormLabel>
                         <FormControl>
                             <Input
                             min={0}

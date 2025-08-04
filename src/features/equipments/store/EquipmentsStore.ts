@@ -112,8 +112,8 @@ export const useEquipmentsStore = create<equipmentsStoreType>((set, get)=>({
             if (!equipListData) {toast.error("Algo deu errado!"); return}
             
             set(()=>({
-                equipmentsList: equipListData,
-                filteredEquipmentsList: equipListData}))            
+                equipmentsList: [...equipListData].reverse(),
+                filteredEquipmentsList: [...equipListData].reverse()}))            
     },
     
     filteredEquipmentsList: [],

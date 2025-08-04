@@ -7,7 +7,7 @@ function AddEquipIcon() {
     const openEquipModal = useEquipmentsStore(state => state.openEquipModal)
     
     return (
-        <Button variant={"success"} className='shadow w-full md:w-1/3 h-full' onClick={()=>openEquipModal()}>
+        <Button variant={"success"} className='dark:text-white shadow w-full md:w-1/3 h-full' onClick={()=>openEquipModal()}>
             Adicionar equipamento
             <PiPlus/>
         </Button>

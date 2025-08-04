@@ -27,7 +27,9 @@ export const useChangesStore = create<ChangesStoreType>((set) => ({
          if (!changesListData) { 
             toast.error("Algo deu errado!"); return }
 
-         set(()=>({changesHistoryList: changesListData, filteredChangesLogList: changesListData}))
+         set(()=>({
+            changesHistoryList: [...changesListData].reverse(), 
+            filteredChangesLogList: [...changesListData].reverse()}))
     },
     
     openChangesLogModal: (changeLogId: string) => {

@@ -63,7 +63,7 @@ function ExportCsvButton() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant={'default'} className="p-8 md:p-12! text-lg md:w-1/3 w-full">
+                <Button variant={'default'} className="text-white dark:text-black p-8 md:p-12! text-lg w-full">
                     Exportar tabela pra CSV
                     <PiExport className="text-2xl"/>
                 </Button>

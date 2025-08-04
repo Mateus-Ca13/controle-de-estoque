@@ -50,7 +50,7 @@ export function EquipmentsDataTable<TData, TValue>({ columns, data }: Equipments
  
 
   return (
-    <div className="overflow-hidden border p-2 px-4 rounded-md w-full my-4 bg-white shadow-lg">
+    <div className="overflow-hidden border p-2 px-4 rounded-md w-full my-4 dark:bg-neutral-800 bg-white shadow-lg">
        <div className="flex flex-col-reverse md:flex-row items-center py-4 pb-10 gap-4">
         <Input
           placeholder="Filtrar equipamentos..."
@@ -106,23 +106,27 @@ export function EquipmentsDataTable<TData, TValue>({ columns, data }: Equipments
           )}
         </TableBody>
       </Table>
-      <div className="flex items-center justify-end space-x-2 py-4 mx-8">
+      <div className="flex items-center justify-end space-x-2 py-4 mx-2 md:mx-8">
+        <div className="font-semibold me-4 text-xs md:text-sm">
+          Página {table.getState().pagination.pageIndex +1} de {table.getPageCount()}
+        </div>
         <Button
-          variant="outline"
+          variant="default"
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          Anterior
         </Button>
         <Button
-          variant="outline"
+          variant="default"
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          Próximo
         </Button>
+        
       </div>
     </div>
   )
