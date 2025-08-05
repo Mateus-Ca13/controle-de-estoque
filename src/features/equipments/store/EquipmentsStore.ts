@@ -47,7 +47,7 @@ export const useEquipmentsStore = create<equipmentsStoreType>((set, get)=>({
         
         const currentEquip = equipId? 
         searchEquipmentById(get().equipmentsList ,equipId) : 
-        {id: String(Number(equipmentsList[0].id)+1), name: "", category: "computers", details: "", brand: "", model: "", amount: 0} as Equipment
+        {id: String(Number(equipmentsList[0].id)+1), name: "", category: "", details: "", brand: "", model: "", amount: 0} as Equipment
        
         set(()=>({
             editingEquipment: currentEquip,
@@ -74,7 +74,7 @@ export const useEquipmentsStore = create<equipmentsStoreType>((set, get)=>({
     createAnEquipment: async (newEquipment: Equipment): Promise<Equipment|null> => {
             const responseEquip: Equipment|null = await postEquipmentService(newEquipment)
             if (!responseEquip) {toast.error("Algo deu errado!"); return null}
-            set((state)=>({equipmentsList: [...state.equipmentsList, responseEquip]}))
+            set((state)=>({equipmentsList: [responseEquip, ...state.equipmentsList]}))
             return responseEquip
     },
 

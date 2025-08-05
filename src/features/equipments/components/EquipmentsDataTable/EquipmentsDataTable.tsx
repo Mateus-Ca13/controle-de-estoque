@@ -7,7 +7,7 @@ import { Button } from "../../../../components/ui/button"
 import { useEffect, useState } from "react"
 import { Input } from "../../../../components/ui/input"
 import AddEquipIcon from "../AddEquipIcon/AddEquipIcon"
-import { Loader2Icon, RefreshCcw } from "lucide-react"
+import { CheckCircle, Loader2Icon, RefreshCcw } from "lucide-react"
 import { useEquipmentsStore } from "../../store/EquipmentsStore"
 import { toast } from "sonner"
 import { Equipment } from "../../../../types/equipment"
@@ -26,7 +26,8 @@ export function EquipmentsDataTable<TData, TValue>({ columns, data }: Equipments
 
   const  refreshDataList = () => {
         toast("Buscando novos registros...",{icon: <Loader2Icon size={18} className="animate-spin" />})
-       fetchEquipmentsList()
+        fetchEquipmentsList()
+        setTimeout(()=>{toast("Feed Atualizado!", {icon: <CheckCircle size={18} />})},4000)
     }
 
   const table = useReactTable({

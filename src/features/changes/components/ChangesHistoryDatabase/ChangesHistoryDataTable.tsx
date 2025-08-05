@@ -7,7 +7,7 @@ import { Button } from "../../../../components/ui/button"
 import { useEffect, useState } from "react"
 import { Input } from "../../../../components/ui/input"
 import { useChangesStore } from "../../store/ChangesStore"
-import { Loader2Icon, RefreshCcw } from "lucide-react"
+import { CheckCircle, Loader2Icon, RefreshCcw } from "lucide-react"
 import { toast } from "sonner"
 import { EquipmentChangeLog } from "../../../../types/equipmentChange"
 
@@ -26,6 +26,7 @@ export function ChangesHistoryDataTable<TData, TValue>({ columns, data }: Change
   const  refreshDataList = () => {
       toast("Buscando novos registros...",{icon: <Loader2Icon size={18} className="animate-spin" />})
      fetchChangesHistoryList()
+     setTimeout(()=>{toast("Tabela atualizada!", {icon: <CheckCircle size={18} />})},4000)
   }
 
   const table = useReactTable({

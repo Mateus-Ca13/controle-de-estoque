@@ -43,7 +43,7 @@ function ExportCsvButton() {
         
       }else{
         if(tableToBeExported === "changelog"){
-          chosenTable = completeChangesLogList.map((changelog) => ({...changelog, changes: JSON.stringify(changelog.changes)}))
+          chosenTable = completeChangesLogList.map((changelog) => ({...changelog, changes: JSON.stringify(changelog.changes).replace(/["{}]/g, "")}))
           fileName = "all_changeslogs";
         }else{
           chosenTable =  completeEquipmentsList;

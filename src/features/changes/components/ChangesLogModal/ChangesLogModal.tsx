@@ -3,7 +3,7 @@ import { useChangesStore } from '../../store/ChangesStore'
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../../../../components/ui/dialog'
 import { AlertDialogHeader } from '../../../../components/ui/alert-dialog'
 import ChangeLogInput from './ChangeLogInput/ChangeLogInput'
-import { changeTypeTranslate, formatTimestamp } from '../../../../utils/formatContent'
+import { changeTypeTranslate, formatCategoriesName, formatTimestamp } from '../../../../utils/formatContent'
 import { ScrollArea } from '../../../../components/ui/scroll-area'
 
 
@@ -12,7 +12,7 @@ function ChangesLogModal() {
     const isChangesModalOpen = useChangesStore(state => state.isChangesModalOpen)
     const openChangesLogModal = useChangesStore(state => state.openChangesLogModal)
     const closeChangesLogModal = useChangesStore(state => state.closeChangesLogModal)
-    const viewingChangelog = useChangesStore(state => state.viewingChangelog)
+    const viewingChangelog = useChangesStore(state => state.viewingChangelog) 
 
     return (
         viewingChangelog && <Dialog
@@ -29,7 +29,7 @@ function ChangesLogModal() {
             <div className='mt-4'>
               <ChangeLogInput changesInfo={viewingChangelog.changes?.name} propName='Nome'/>
               <ChangeLogInput changesInfo={viewingChangelog.changes?.details} propName='Detalhes'/>
-              <ChangeLogInput changesInfo={viewingChangelog.changes?.category} propName='Categoria'/>
+              <ChangeLogInput formatterFunc={formatCategoriesName as (data: unknown) => string} changesInfo={viewingChangelog.changes?.category} propName='Categoria'/>
               <ChangeLogInput changesInfo={viewingChangelog.changes?.brand} propName='Marca'/>
               <ChangeLogInput changesInfo={viewingChangelog.changes?.model} propName='Modelo'/>
               <ChangeLogInput changesInfo={viewingChangelog.changes?.amount} propName='Quantidade'/>
