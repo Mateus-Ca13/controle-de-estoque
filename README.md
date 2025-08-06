@@ -1,4 +1,4 @@
-# <img src="public/favicon.png" width="48"/> TechStok - Controle de Estoque para TI
+# <img src="public/favicon.png" width="48"/> TechStock - Controle de Estoque para TI
 Um sistema de gerenciamento de estoque simples, eficiente e moderno, desenvolvido para facilitar o controle de equipamentos, categorias e movimentações.
 #### <a href="https://controle-de-estoque-blue.vercel.app/">Clique aqui para acessar esse projeto</a>
 ## 🚀 Funcionalidades
